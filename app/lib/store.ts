@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterSlice from './features/counter/counterSlice';
+import currenciesSlice from './features/currencies/currenciesSlice';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      counter: counterSlice,
+      currencies: currenciesSlice,
     },
   });
 };
