@@ -26,13 +26,13 @@ const Currency = ({ currencySymbol }: Props) => {
     <CurrencyLi>
       <CurrencyIcon currencySymbol={currencySymbol} />
       <CurrencyNameAndSymbol currencySymbol={currencySymbol} />
-      <p className='text-gray-400'>
+      <small className='text-gray-400 font-semibold'>
         First: <strong>{firstPrice}</strong>
-      </p>
-      <p className='text-gray-400'>
+      </small>
+      <small className='text-gray-400 font-semibold'>
         Average:{' '}
         <span className={`${greenOrRed} font-semibold`}>{currentPrice} </span>
-      </p>
+      </small>
       <small className='text-gray-400'>
         <span className={`${greenOrRed} font-semibold`}>
           {formatNumberWithMaxDecimals(percentual as number, 16)}%

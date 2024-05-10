@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Binance Realtime API Dashboard
 
-## Getting Started
+Este projeto é parte de um processo seletivo para a vaga de desenvolvedor web sênior na empresa Allintra. O objetivo é desenvolver um dashboard que se conecte à API da Binance para monitorar e exibir em tempo real o último preço e a flutuação percentual dos preços de criptomoedas específicas desde que a dashboard foi aberta.
 
-First, run the development server:
+## Instalação e Execução
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Certifique-se de ter o Node.js instalado em sua máquina.
+2. Clone o repositório do projeto.
+3. Navegue até o diretório do projeto no terminal.
+4. Execute `npm install` para instalar as dependências.
+5. Para executar o projeto no modo de desenvolvimento, use o comando `npm run dev`.
+6. Para executar o projeto no modo de produção, primeiro, construa o projeto com `npm run build` e, em seguida, execute `npm run start`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Documentação da API da Binance
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Websocket Market Streams – Binance API Documentation](https://binance-docs.github.io/apidocs/spot/en/#websocket-market-streams)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Este projeto é desenvolvido utilizando React, Next.js, TypeScript, Tailwind CSS e Redux.
 
-## Learn More
+## Requisitos Técnicos
 
-To learn more about Next.js, take a look at the following resources:
+### Front-End
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Utilizar ReactJS para construir a interface do usuário.
+- Implementar uma visualização responsiva, adequada para desktops e dispositivos móveis.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Conexão com a API da Binance
 
-## Deploy on Vercel
+- Utilizar Websockets para conectar-se à API da Binance e obter atualizações em tempo real dos preços das criptomoedas: Bitcoin (BTC), Ethereum (ETH), Solana (SOL) e Dogecoin (DOGE).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Funcionalidades do Dashboard
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Exibir o último preço em USDT para cada uma das criptomoedas.
+- Calcular e mostrar o percentual de mudança do preço desde a abertura do dashboard para cada criptomoeda.
+- Atualizar estes dados em tempo real conforme as novas informações são recebidas via Websocket.

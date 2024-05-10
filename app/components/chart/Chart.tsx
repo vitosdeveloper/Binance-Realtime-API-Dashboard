@@ -20,6 +20,8 @@ const Chart = ({ data, currencySymbol }: Props) => {
           height: 350,
           background: 'transparent',
           borderWidth: 0,
+          toolbar: { show: false },
+          memo: true,
         },
         title: {
           text: currencySymbol,
