@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import currenciesSlice from './features/currencies/currenciesSlice';
+import applicationStateSlice from './features/applicationState/applicationStateSlice';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       currencies: currenciesSlice,
+      applicationState: applicationStateSlice,
     },
   });
 };
