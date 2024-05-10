@@ -27,6 +27,13 @@ const initialState: CurrenciesSlice = {
   },
 };
 
+export const currencyNames: CurrenciesNames[] = [
+  'BTCUSDT',
+  'DOGEUSDT',
+  'ETHUSDT',
+  'SOLUSDT',
+];
+
 export const currencieSlice = createSlice({
   name: 'counterSlice',
   initialState,

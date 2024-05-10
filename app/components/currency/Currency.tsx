@@ -1,36 +1,21 @@
 'use client';
-import { CurrenciesNames, ICurrency } from '@/app/types/Currencies';
-import BTCUSDT_ICON from '@/public/coins/BTCUSDT.svg';
-import DOGEUSDT_ICON from '@/public/coins/DOGEUSDT.svg';
-import ETHUSDT_ICON from '@/public/coins/ETHUSDT.svg';
-import SOLUSDT_ICON from '@/public/coins/SOLUSDT.svg';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-import Image from 'next/image';
+import { CurrenciesNames } from '@/app/types/Currencies';
 import CurrencySkeleton from '../skeleton/currency/CurrencySkeleton';
 import { formatNumberWithMaxDecimals } from '@/app/utils/formatNumberWithMaxDecimals';
 import { memo } from 'react';
 import CurrencyLi from './CurrencyLi';
+import { selectCurrencies } from '@/app/lib/features/currencies/currenciesSlice';
+import { useAppSelector } from '@/app/lib/hooks';
+import CurrencyIcon from './CurrencyIcon';
+import CurrencyNameAndSymbol from './CurrencyNameAndSymbol';
 
 type Props = {
-  currentCurrency: ICurrency;
   currencySymbol: CurrenciesNames;
 };
 
-export const currencyNames: { [key in CurrenciesNames]: string } = {
-  BTCUSDT: 'Bitcoin',
-  DOGEUSDT: 'Dogecoin',
-  ETHUSDT: 'Ethereum',
-  SOLUSDT: 'Solana',
-};
-
-export const currencyIcons: { [key in CurrenciesNames]: StaticImport } = {
-  BTCUSDT: BTCUSDT_ICON,
-  DOGEUSDT: DOGEUSDT_ICON,
-  ETHUSDT: ETHUSDT_ICON,
-  SOLUSDT: SOLUSDT_ICON,
-};
-
-const Currency = ({ currentCurrency, currencySymbol }: Props) => {
+const Currency = ({ currencySymbol }: Props) => {
+  const { currencies } = useAppSelector(selectCurrencies);
+  const currentCurrency = currencies[currencySymbol as CurrenciesNames];
   const { firstPrice, currentPrice, percentual } = currentCurrency;
   const greenOrRed =
     percentual && percentual < 0 ? 'text-red-500' : 'text-green-500';
@@ -39,17 +24,8 @@ const Currency = ({ currentCurrency, currencySymbol }: Props) => {
     return <CurrencySkeleton currencySymbol={currencySymbol} />;
   return (
     <CurrencyLi>
-      <Image
-        className='h-16 w-auto mb-4 m-auto'
-        src={currencyIcons[currencySymbol]}
-        alt={currencySymbol}
-      />
-      <h3 className='m-auto text-2xl font-semibold text-gray-200'>
-        {currencyNames[currencySymbol]}
-      </h3>
-      <small className='m-auto font-semibold text-gray-200 mb-4'>
-        {currencySymbol}
-      </small>
+      <CurrencyIcon currencySymbol={currencySymbol} />
+      <CurrencyNameAndSymbol currencySymbol={currencySymbol} />
       <p className='text-gray-400'>
         First: <strong>{firstPrice}</strong>
       </p>

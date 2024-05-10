@@ -1,9 +1,10 @@
 import { CurrenciesNames } from '@/app/types/Currencies';
 import React, { memo } from 'react';
-import { currencyIcons, currencyNames } from '../../currency/Currency';
 import Image from 'next/image';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { currencyIcons } from '../../currency/CurrencyIcon';
+import { currencyNames } from '../../currency/CurrencyNameAndSymbol';
 
 type Props = {
   currencySymbol: CurrenciesNames;

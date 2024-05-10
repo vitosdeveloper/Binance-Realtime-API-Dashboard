@@ -1,6 +1,6 @@
 import { CurrenciesNames } from '@/app/types/Currencies';
 import { ApexOptions } from 'apexcharts';
-import { memo, useEffect, useRef } from 'react';
+import { memo, useCallback } from 'react';
 import ApexCharts from 'react-apexcharts';
 
 type Props = {
@@ -12,61 +12,43 @@ type Props = {
 };
 
 const Chart = ({ data, currencySymbol }: Props) => {
-  const options = {
-    chart: {
-      type: 'candlestick',
-      height: 350,
-      background: 'transparent',
-      borderWidth: 0,
-    },
-    title: {
-      text: currencySymbol,
-      style: {
-        color: '#ffffff',
-      },
-    },
-    xaxis: {
-      type: 'numeric',
-      axisBorder: {
-        color: '#444444',
-      },
-      labels: {
-        style: {
-          colors: '#cccccc',
+  const options = useCallback(
+    () =>
+      ({
+        chart: {
+          type: 'candlestick',
+          height: 350,
+          background: 'transparent',
+          borderWidth: 0,
         },
-      },
-    },
-    yaxis: {
-      tooltip: {
-        enabled: true,
-      },
-      axisBorder: {
-        color: '#444444',
-      },
-      labels: {
-        style: {
-          colors: '#cccccc',
+        title: {
+          text: currencySymbol,
+          style: { color: '#ffffff' },
+          align: 'center',
         },
-      },
-    },
-    fill: { colors: ['#1f1f1f'] },
-    theme: {
-      mode: 'dark',
-      monochrome: {
-        enabled: true,
-        color: '#cccccc',
-      },
-      legend: {
-        labels: {
-          colors: '#ffffff',
+        xaxis: {
+          type: 'numeric',
+          axisBorder: { color: '#444444' },
+          labels: { style: { colors: '#cccccc' } },
         },
-      },
-    },
-  } as ApexOptions;
+        yaxis: {
+          tooltip: { enabled: true },
+          axisBorder: { color: '#444444' },
+          labels: { style: { colors: '#cccccc' } },
+        },
+        fill: { colors: ['#1f1f1f'] },
+        theme: {
+          mode: 'dark',
+          monochrome: { enabled: true, color: '#cccccc' },
+          legend: { labels: { colors: '#ffffff' } },
+        },
+      } as ApexOptions),
+    [currencySymbol]
+  );
 
   return (
     <ApexCharts
-      options={options}
+      options={options()}
       series={[{ data }]}
       type='candlestick'
       height={450}

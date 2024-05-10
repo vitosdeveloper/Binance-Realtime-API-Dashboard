@@ -5,11 +5,14 @@ import {
   loading,
   success,
 } from '../lib/features/applicationState/applicationStateSlice';
-import { changeCurrencyLastThirtyPrices } from '../lib/features/currencies/currenciesChartsSlice';
 import { isCurrencyForChart } from '../types/isCurrencyForChart';
+import { changeCurrencyLastThirtyPrices } from '../lib/features/currencies/currenciesChartsSlice';
+import { updateCurrency } from '../lib/features/currencies/currenciesSlice';
+import { isCurrency } from '../types/isCurrency';
 
-const useLastThirtyPrices = () => {
+const useWebSockets = (customHook: string) => {
   const dispatch = useAppDispatch();
+  const isUseCurrencies = customHook === 'useCurrencies';
 
   const getLastThirtyPrices = useCallback(() => {
     const showError = () => {
@@ -22,14 +25,21 @@ const useLastThirtyPrices = () => {
       getLastThirtyPrices();
     };
     try {
-      dispatch(loading());
+      // dispatch(loading());
       const ws = new WebSocket(
-        'wss://stream.binance.com:9443/stream?streams=btcusdt@kline_1m/ethusdt@kline_1m/solusdt@kline_1m/dogeusdt@kline_1m'
+        isUseCurrencies
+          ? 'wss://stream.binance.com:9443/stream?streams=btcusdt@avgPrice/ethusdt@avgPrice/solusdt@avgPrice/dogeusdt@avgPrice'
+          : 'wss://stream.binance.com:9443/stream?streams=btcusdt@kline_1m/ethusdt@kline_1m/solusdt@kline_1m/dogeusdt@kline_1m'
       );
+      ws.onopen = () => dispatch(success());
       ws.onmessage = (e) => {
         const { data } = JSON.parse(e.data);
-        if (isCurrencyForChart(data)) {
-          dispatch(success());
+        if (isUseCurrencies && isCurrency(data)) {
+          dispatch(
+            updateCurrency({ currencyName: data.s, price: Number(data.w) })
+          );
+          return;
+        } else if (!isUseCurrencies && isCurrencyForChart(data))
           dispatch(
             changeCurrencyLastThirtyPrices({
               candleStickObject: {
@@ -41,7 +51,6 @@ const useLastThirtyPrices = () => {
               currencyName: data.s,
             })
           );
-        }
       };
       ws.onerror = (e) => {
         ws.close();
@@ -50,11 +59,11 @@ const useLastThirtyPrices = () => {
     } catch (error) {
       showError();
     }
-  }, [dispatch]);
+  }, [dispatch, isUseCurrencies]);
 
   useEffect(() => {
     getLastThirtyPrices();
   }, [getLastThirtyPrices]);
 };
 
-export default useLastThirtyPrices;
+export default useWebSockets;
