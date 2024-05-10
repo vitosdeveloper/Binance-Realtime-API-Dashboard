@@ -1,23 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
+import { CurrenciesNames, CurrenciesSlice } from '@/app/types/Currencies';
 
-export type Currencies = 'BTCUSDT' | 'ETHUSDT' | 'SOLUSDT' | 'DOGEUSDT';
-export type ICurrencieSlice = {
+const initialState: CurrenciesSlice = {
   currencies: {
-    [key in Currencies]: {
-      fp: null | number;
-      cp: null | number;
-      p: null | number;
-    };
-  };
-};
-
-const initialState: ICurrencieSlice = {
-  currencies: {
-    BTCUSDT: { fp: null, cp: null, p: 0.0 },
-    ETHUSDT: { fp: null, cp: null, p: 0.0 },
-    SOLUSDT: { fp: null, cp: null, p: 0.0 },
-    DOGEUSDT: { fp: null, cp: null, p: 0.0 },
+    BTCUSDT: { firstPrice: null, currentPrice: null, percentual: 0.0 },
+    ETHUSDT: { firstPrice: null, currentPrice: null, percentual: 0.0 },
+    SOLUSDT: { firstPrice: null, currentPrice: null, percentual: 0.0 },
+    DOGEUSDT: { firstPrice: null, currentPrice: null, percentual: 0.0 },
   },
 };
 
@@ -28,19 +18,23 @@ export const currencieSlice = createSlice({
     updateCurrency: (
       state,
       action: PayloadAction<{
-        currencyName: Currencies;
+        currencyName: CurrenciesNames;
         price: number;
       }>
     ) => {
       const { price, currencyName } = action.payload;
       const selectedCoin = state.currencies[currencyName];
-      const fp = selectedCoin.fp ? selectedCoin.fp : price;
+      const firstPrice = selectedCoin.firstPrice
+        ? selectedCoin.firstPrice
+        : price;
       const percentageFrom = (n1: number, n2: number) => (n2 - n1) * (100 / n1);
-      const p = selectedCoin.fp ? percentageFrom(selectedCoin.fp, price) : 0;
+      const percentual = selectedCoin.firstPrice
+        ? percentageFrom(selectedCoin.firstPrice, price)
+        : 0;
 
       state.currencies = {
         ...state.currencies,
-        [currencyName]: { fp, p, cp: price },
+        [currencyName]: { firstPrice, percentual, currentPrice: price },
       };
     },
   },

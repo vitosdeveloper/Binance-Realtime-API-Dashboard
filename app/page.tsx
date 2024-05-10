@@ -1,38 +1,35 @@
 'use client';
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from './lib/hooks';
-import {
-  Currencies,
-  selectCurrencies,
-  updateCurrency,
-} from './lib/features/currencies/currenciesSlice';
+import { useAppSelector } from './lib/hooks';
+import { selectCurrencies } from './lib/features/currencies/currenciesSlice';
 import useCurrencies from './custom-hooks/useCurrencies';
+import { CurrenciesNames } from './types/Currencies';
 
 export default function Home() {
-  const { currencies } = useAppSelector(selectCurrencies);
-
   useCurrencies();
+  const { currencies } = useAppSelector(selectCurrencies);
 
   return (
     <div>
       <ul>
         {Object.keys(currencies).map((currencySymbol) => {
-          const currentCurrency = currencies[currencySymbol as Currencies];
-          const { fp, cp, p } = currentCurrency;
-          if (fp)
+          const currentCurrency = currencies[currencySymbol as CurrenciesNames];
+          const { firstPrice, currentPrice, percentual } = currentCurrency;
+          if (firstPrice)
             return (
               <li key={currencySymbol} className='mb-4'>
                 <p>{currencySymbol}</p>
-                <p>First price: {fp}</p>
-                <p>Current Price: {cp}</p>
+                <p>First price: {firstPrice}</p>
+                <p>Current Price: {currentPrice}</p>
                 <p>
-                  Percentage:{' '}
+                  Percentage:
                   <span
                     className={`${
-                      p && p < 0 ? 'text-red-500' : 'text-green-500'
+                      percentual && percentual < 0
+                        ? 'text-red-500'
+                        : 'text-green-500'
                     }`}
                   >
-                    {p}%
+                    {percentual}%
                   </span>
                 </p>
               </li>

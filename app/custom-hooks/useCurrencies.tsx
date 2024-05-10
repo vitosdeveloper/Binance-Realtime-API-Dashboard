@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useAppDispatch } from '../lib/hooks';
 import { updateCurrency } from '../lib/features/currencies/currenciesSlice';
+import { isCurrency } from '../types/isCurrency';
 
 const useCurrencies = () => {
   const dispatch = useAppDispatch();
@@ -15,8 +16,12 @@ const useCurrencies = () => {
     // };
     ws.onmessage = (e) => {
       const { data } = JSON.parse(e.data);
-      dispatch(updateCurrency({ currencyName: data.s, price: Number(data.p) }));
-      // ws.close();
+      if (isCurrency(data)) {
+        dispatch(
+          updateCurrency({ currencyName: data.s, price: Number(data.p) })
+        );
+      }
+      ws.close();
     };
   }, [dispatch]);
 
