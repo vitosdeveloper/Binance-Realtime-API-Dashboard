@@ -12,6 +12,6 @@ export type CurrenciesSlice = {
 };
 
 export interface IRawCurrency {
-  p: number;
+  w: number;
   s: CurrenciesNames;
 }

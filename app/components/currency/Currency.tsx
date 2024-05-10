@@ -7,6 +7,7 @@ import SOLUSDT_ICON from '@/public/coins/SOLUSDT.svg';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 import CurrencySkeleton from '../skeleton/currency/CurrencySkeleton';
+import { formatNumberWithMaxDecimals } from '@/app/utils/formatNumberWithMaxDecimals';
 
 type Props = {
   currentCurrency: ICurrency;
@@ -47,19 +48,21 @@ const Currency = ({ currentCurrency, currencySymbol }: Props) => {
       <small className='m-auto font-semibold text-gray-200 mb-4'>
         {currencySymbol}
       </small>
-      <p className='text-gray-400'>First Price: {firstPrice}</p>
       <p className='text-gray-400'>
-        Current Price:{' '}
+        First Price: <strong>{firstPrice}</strong>
+      </p>
+      <p className='text-gray-400'>
+        Average Price:{' '}
         <span className={`${greenOrRed} font-semibold`}>{currentPrice} </span>
       </p>
       <small className='text-gray-400'>
-        <span className={`${greenOrRed} font-semibold text-xs`}>
-          {percentual}%
+        <span className={`${greenOrRed} font-semibold`}>
+          {formatNumberWithMaxDecimals(percentual as number, 16)}%
         </span>
       </small>
       <small className='text-gray-400'>
         <span className={`${greenOrRed} font-semibold`}>
-          {currentPrice - firstPrice}
+          {formatNumberWithMaxDecimals(currentPrice - firstPrice, 16)}
         </span>
       </small>
     </li>

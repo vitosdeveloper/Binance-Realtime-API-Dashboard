@@ -14,7 +14,7 @@ export const applicationStateSlice = createSlice({
   initialState,
   reducers: {
     loading: (state) => {
-      state.applicationState = { loading: true, error: null };
+      state.applicationState = { ...state.applicationState, loading: true };
     },
     success: (state) => {
       state.applicationState = { loading: false, error: null };

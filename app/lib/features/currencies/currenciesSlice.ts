@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { CurrenciesNames, CurrenciesSlice } from '@/app/types/Currencies';
+import { formatNumberWithMaxDecimals } from '@/app/utils/formatNumberWithMaxDecimals';
 
 const initialState: CurrenciesSlice = {
   currencies: {

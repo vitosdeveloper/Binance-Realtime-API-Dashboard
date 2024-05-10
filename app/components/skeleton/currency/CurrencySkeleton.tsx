@@ -24,10 +24,10 @@ const CurrencySkeleton = ({ currencySymbol }: Props) => {
         {currencySymbol}
       </small>
       <SkeletonTheme baseColor='#202020' highlightColor='#444'>
-        <Skeleton style={{ top: '2px' }} width={150} height={12} />
-        <Skeleton style={{ top: '-4px' }} width={180} height={12} />
-        <Skeleton style={{ top: '-13px' }} width={160} height={8} />
-        <Skeleton style={{ top: '-20px' }} width={140} height={8} />
+        <Skeleton style={{ top: '2px' }} width={180} height={12} />
+        <Skeleton style={{ top: '0px' }} width={240} height={12} />
+        <Skeleton style={{ top: '-2px' }} width={180} height={8} />
+        <Skeleton style={{ top: '-5px' }} width={160} height={8} />
       </SkeletonTheme>
     </li>
   );

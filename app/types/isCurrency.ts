@@ -4,9 +4,9 @@ export const isCurrency = (currency: unknown): currency is IRawCurrency => {
   if (
     !currency ||
     typeof currency !== 'object' ||
-    !('p' in currency) ||
+    !('w' in currency) ||
     !('s' in currency) ||
-    !currency.p ||
+    !currency.w ||
     !currency.s ||
     (currency.s != 'BTCUSDT' &&
       currency.s != 'ETHUSDT' &&
