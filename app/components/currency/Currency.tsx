@@ -8,6 +8,8 @@ import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 import CurrencySkeleton from '../skeleton/currency/CurrencySkeleton';
 import { formatNumberWithMaxDecimals } from '@/app/utils/formatNumberWithMaxDecimals';
+import { memo } from 'react';
+import CurrencyLi from './CurrencyLi';
 
 type Props = {
   currentCurrency: ICurrency;
@@ -36,7 +38,7 @@ const Currency = ({ currentCurrency, currencySymbol }: Props) => {
   if (!firstPrice || !currentPrice)
     return <CurrencySkeleton currencySymbol={currencySymbol} />;
   return (
-    <li className='flex flex-col items-center break-words p-6 bg-gray-800 shadow-lg rounded-lg border border-gray-700 hover:shadow-xl transition duration-300 ease-in-out'>
+    <CurrencyLi>
       <Image
         className='h-16 w-auto mb-4 m-auto'
         src={currencyIcons[currencySymbol]}
@@ -49,10 +51,10 @@ const Currency = ({ currentCurrency, currencySymbol }: Props) => {
         {currencySymbol}
       </small>
       <p className='text-gray-400'>
-        First Price: <strong>{firstPrice}</strong>
+        First: <strong>{firstPrice}</strong>
       </p>
       <p className='text-gray-400'>
-        Average Price:{' '}
+        Average:{' '}
         <span className={`${greenOrRed} font-semibold`}>{currentPrice} </span>
       </p>
       <small className='text-gray-400'>
@@ -65,8 +67,8 @@ const Currency = ({ currentCurrency, currencySymbol }: Props) => {
           {formatNumberWithMaxDecimals(currentPrice - firstPrice, 16)}
         </span>
       </small>
-    </li>
+    </CurrencyLi>
   );
 };
 
-export default Currency;
+export default memo(Currency);

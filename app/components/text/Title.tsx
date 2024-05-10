@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, memo } from 'react';
 
 const Title = ({ children }: PropsWithChildren) => {
   return (
@@ -8,4 +8,4 @@ const Title = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default Title;
+export default memo(Title);

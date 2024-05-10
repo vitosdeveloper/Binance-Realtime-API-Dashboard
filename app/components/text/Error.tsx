@@ -1,5 +1,6 @@
 import { selectApplicationState } from '@/app/lib/features/applicationState/applicationStateSlice';
 import { useAppSelector } from '@/app/lib/hooks';
+import { memo } from 'react';
 
 const Error = () => {
   const { applicationState } = useAppSelector(selectApplicationState);
@@ -15,4 +16,4 @@ const Error = () => {
     );
 };
 
-export default Error;
+export default memo(Error);

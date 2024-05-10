@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, memo } from 'react';
 
 const AppContainer = ({ children }: PropsWithChildren) => {
   return (
@@ -8,4 +8,4 @@ const AppContainer = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default AppContainer;
+export default memo(AppContainer);

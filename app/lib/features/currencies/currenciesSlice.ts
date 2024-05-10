@@ -1,14 +1,29 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { CurrenciesNames, CurrenciesSlice } from '@/app/types/Currencies';
-import { formatNumberWithMaxDecimals } from '@/app/utils/formatNumberWithMaxDecimals';
 
 const initialState: CurrenciesSlice = {
   currencies: {
-    BTCUSDT: { firstPrice: null, currentPrice: null, percentual: 0.0 },
-    ETHUSDT: { firstPrice: null, currentPrice: null, percentual: 0.0 },
-    SOLUSDT: { firstPrice: null, currentPrice: null, percentual: 0.0 },
-    DOGEUSDT: { firstPrice: null, currentPrice: null, percentual: 0.0 },
+    BTCUSDT: {
+      firstPrice: null,
+      currentPrice: null,
+      percentual: 0.0,
+    },
+    ETHUSDT: {
+      firstPrice: null,
+      currentPrice: null,
+      percentual: 0.0,
+    },
+    SOLUSDT: {
+      firstPrice: null,
+      currentPrice: null,
+      percentual: 0.0,
+    },
+    DOGEUSDT: {
+      firstPrice: null,
+      currentPrice: null,
+      percentual: 0.0,
+    },
   },
 };
 
@@ -32,11 +47,16 @@ export const currencieSlice = createSlice({
       const percentual = selectedCoin.firstPrice
         ? percentageFrom(selectedCoin.firstPrice, price)
         : 0;
-
       state.currencies = {
         ...state.currencies,
-        [currencyName]: { firstPrice, percentual, currentPrice: price },
+        [currencyName]: {
+          ...selectedCoin,
+          firstPrice,
+          percentual,
+          currentPrice: price,
+        },
       };
+      return;
     },
   },
 });
