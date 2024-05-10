@@ -1,6 +1,9 @@
 # Binance Realtime API Dashboard
 
 Este projeto é parte de um processo seletivo para a vaga de desenvolvedor web sênior na empresa Allintra. O objetivo é desenvolver um dashboard que se conecte à API da Binance para monitorar e exibir em tempo real o último preço e a flutuação percentual dos preços de criptomoedas específicas desde que a dashboard foi aberta.
+[Websocket Market Streams – Binance API Documentation]
+
+#### [Live URL](https://binance-realtime-api-dashboard.vercel.app/)
 
 ## Instalação e Execução
 
@@ -13,7 +16,7 @@ Este projeto é parte de um processo seletivo para a vaga de desenvolvedor web s
 
 ## Documentação da API da Binance
 
-- [Websocket Market Streams – Binance API Documentation](https://binance-docs.github.io/apidocs/spot/en/#websocket-market-streams)
+- [LIVE URL](https://binance-docs.github.io/apidocs/spot/en/#websocket-market-streams)
 
 Este projeto é desenvolvido utilizando React, Next.js, TypeScript, Tailwind CSS e Redux.
 
