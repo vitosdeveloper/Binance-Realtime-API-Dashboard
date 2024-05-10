@@ -32,7 +32,7 @@ export const currenciesChartsSlice = createSlice({
       if (!selectedCoinArr.length) {
         state.currenciesForChart = {
           ...state.currenciesForChart,
-          [currencyName]: Array(66).fill(candleStickObject),
+          [currencyName]: Array(12).fill(candleStickObject),
         };
         return;
       }

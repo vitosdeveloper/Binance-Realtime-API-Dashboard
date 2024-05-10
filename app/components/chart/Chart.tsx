@@ -2,7 +2,6 @@ import { CurrenciesNames } from '@/app/types/Currencies';
 import { ApexOptions } from 'apexcharts';
 import { memo, useCallback } from 'react';
 import ApexCharts from 'react-apexcharts';
-import ShadowReflectionWrapper from '../fx/ShadowReflectionWrapper';
 
 type Props = {
   currencySymbol: CurrenciesNames;
@@ -23,24 +22,37 @@ const Chart = ({ data, currencySymbol }: Props) => {
           borderWidth: 0,
           toolbar: { show: false },
           memo: true,
+          animations: { enabled: false },
+          dataLabels: { enabled: false },
+          stroke: {
+            width: 2,
+            curve: 'straight',
+          },
         },
+        markers: { size: 0 },
+        dataLabels: { enabled: false },
+        animations: { enabled: false },
         title: {
           text: currencySymbol,
           style: { color: 'rgb(203, 213, 225)' },
           align: 'center',
+          animations: { enabled: false },
         },
         xaxis: {
           type: 'numeric',
           axisBorder: { color: '#444444' },
           labels: { style: { colors: 'rgb(203, 213, 225)' } },
+          animations: { enabled: false },
         },
         yaxis: {
           tooltip: { enabled: true },
           axisBorder: { color: '#444444' },
           labels: { style: { colors: 'rgb(203, 213, 225)' } },
+          animations: { enabled: false },
         },
         fill: { colors: ['#1f1f1f'] },
         theme: {
+          animations: { enabled: false },
           mode: 'dark',
           monochrome: { enabled: true, color: 'rgb(203, 213, 225)' },
           legend: { labels: { colors: 'rgb(203, 213, 225)' } },
