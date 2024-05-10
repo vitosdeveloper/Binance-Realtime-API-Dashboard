@@ -6,6 +6,7 @@ import DOGEUSDT_ICON from '@/public/coins/DOGEUSDT.svg';
 import ETHUSDT_ICON from '@/public/coins/ETHUSDT.svg';
 import SOLUSDT_ICON from '@/public/coins/SOLUSDT.svg';
 import { memo } from 'react';
+import ShadowReflectionWrapper from '../fx/ShadowReflectionWrapper';
 
 type Props = { currencySymbol: CurrenciesNames };
 
@@ -18,11 +19,13 @@ export const currencyIcons: { [key in CurrenciesNames]: StaticImport } = {
 
 const CurrencyIcon = ({ currencySymbol }: Props) => {
   return (
-    <Image
-      className='h-16 w-auto mb-4 m-auto'
-      src={currencyIcons[currencySymbol]}
-      alt={currencySymbol}
-    />
+    <ShadowReflectionWrapper>
+      <Image
+        className='h-16 w-auto mb-4 m-auto'
+        src={currencyIcons[currencySymbol]}
+        alt={currencySymbol}
+      />
+    </ShadowReflectionWrapper>
   );
 };
 

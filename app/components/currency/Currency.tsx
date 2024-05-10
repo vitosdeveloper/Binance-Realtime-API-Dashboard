@@ -8,6 +8,7 @@ import { selectCurrencies } from '@/app/lib/features/currencies/currenciesSlice'
 import { useAppSelector } from '@/app/lib/hooks';
 import CurrencyIcon from './CurrencyIcon';
 import CurrencyNameAndSymbol from './CurrencyNameAndSymbol';
+import ShadowReflectionWrapper from '../fx/ShadowReflectionWrapper';
 
 type Props = {
   currencySymbol: CurrenciesNames;
